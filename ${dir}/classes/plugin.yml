@@ -1,0 +1,21 @@
+name: NaturoForumSMP-1.19
+version: '1.0'
+main: de.benji.naturoforumsmp.Main.Main
+api-version: 1.19
+prefix: NF_SMP
+authors: [Benji]
+description: NaturoForumSMP Plugin
+commands:
+  smp:
+    usage: "/smp [enable|disable|status] <Subplugin>"
+  status:
+  setmsgcolor:
+  r:
+  headshop:
+  placebrausebad:
+  npc:
+  smphelp:
+  permission:
+  ping:
+  calc:
+  portal:
