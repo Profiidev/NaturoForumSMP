@@ -11,7 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 
 public class MsgInvs {
-    static InvAPI invAPI = GlobalManager.getInvAPI();
+    private static final InvAPI invAPI = GlobalManager.getInvAPI();
 
     public static Inventory getColorInv(MsgStylePos stylePos) {
         Inventory i = invAPI.createInv(4, InvTitles.msg_ColorInv + stylePos.name, InvEnums.Full, true, 31);

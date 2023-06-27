@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PluginCommand implements CommandExecutor, TabCompleter {
-	List<String> dev = GlobalManager.getSubpluginManager().getAllDevSubplugins();
+	private final List<String> dev = GlobalManager.getSubpluginManager().getAllDevSubplugins();
 	
 	@Override
 	public boolean onCommand(CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {

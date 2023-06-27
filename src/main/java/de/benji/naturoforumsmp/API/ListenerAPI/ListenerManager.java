@@ -7,26 +7,27 @@ import org.bukkit.event.Event;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ListenerManager {
-    private final HashMap<Listeners, HashMap<Subplugin, EventCallback>> calls;
-    private final HashMap<Listeners, List<EventCallback>> alwaysCalls;
+    private final HashMap<Listeners, HashMap<Subplugin, Consumer<Event>>> calls;
+    private final HashMap<Listeners, List<Consumer<Event>>> alwaysCalls;
 
     public ListenerManager() {
         calls = new HashMap<>();
         alwaysCalls = new HashMap<>();
     }
 
-    public void addCallback(Subplugin subplugin, Listeners listeners, EventCallback eventCallback) {
-        HashMap<Subplugin, EventCallback> events = calls.get(listeners);
+    public void addCallback(Subplugin subplugin, Listeners listeners, Consumer<Event> eventCallback) {
+        HashMap<Subplugin, Consumer<Event>> events = calls.get(listeners);
         if(events == null)
             events = new HashMap<>();
         events.put(subplugin, eventCallback);
         calls.put(listeners, events);
     }
 
-    public void addAlwaysCallback(Listeners listeners, EventCallback eventCallback) {
-        List<EventCallback> events = alwaysCalls.get(listeners);
+    public void addAlwaysCallback(Listeners listeners, Consumer<Event> eventCallback) {
+        List<Consumer<Event>> events = alwaysCalls.get(listeners);
         if(events == null)
             events = new ArrayList<>();
 
@@ -35,22 +36,17 @@ public class ListenerManager {
     }
 
     public void callListeners(Listeners listeners, Event e) {
-        HashMap<Subplugin, EventCallback> events = calls.get(listeners);
+        HashMap<Subplugin, Consumer<Event>> events = calls.get(listeners);
         if(events != null)
             for(Subplugin subplugin : events.keySet()) {
                 if(!GlobalManager.getSubpluginManager().isPluginEnabled(subplugin))
                     continue;
-                events.get(subplugin).onEvent(e);
+                events.get(subplugin).accept(e);
             }
 
-        List<EventCallback> alwaysEvents = alwaysCalls.get(listeners);
+        List<Consumer<Event>> alwaysEvents = alwaysCalls.get(listeners);
         if(alwaysEvents != null)
-            for(EventCallback eventCallback: alwaysEvents)
-                eventCallback.onEvent(e);
-    }
-
-    @FunctionalInterface
-    public interface EventCallback {
-        void onEvent(Event e);
+            for(Consumer<Event> eventCallback: alwaysEvents)
+                eventCallback.accept(e);
     }
 }

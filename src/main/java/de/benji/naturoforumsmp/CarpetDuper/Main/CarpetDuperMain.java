@@ -1,6 +1,6 @@
 package de.benji.naturoforumsmp.CarpetDuper.Main;
 
-import de.benji.naturoforumsmp.API.ConfigAPI.ConfigKey;
+import de.benji.naturoforumsmp.API.DataStoreAPI.DataKey;
 import de.benji.naturoforumsmp.API.GlobalManager;
 import de.benji.naturoforumsmp.API.ListenerAPI.ListenerManager;
 import de.benji.naturoforumsmp.API.ListenerAPI.Listeners;
@@ -27,7 +27,7 @@ public class CarpetDuperMain {
         lm.addCallback(Subplugin.CarpetDuper, Listeners.BlockPlace, CarpetDuperBlockPlace::onBlockPlace);
         lm.addCallback(Subplugin.CarpetDuper, Listeners.BlockDispense, CarpetDuperBlockDispense::onBlockDispense);
 
-        dupers = GlobalManager.getConfigAPI().loadLocationList(ConfigKey.CarpetDuperLoc.key);
+        dupers = GlobalManager.getDataStoreAPI().loadLocationList(DataKey.CarpetDuperLoc);
 
         //recipe
         ItemStack i = GlobalManager.getInvAPI().createIS(Material.DROPPER, ItemTitles.carpetDuper_Duper);
@@ -46,7 +46,7 @@ public class CarpetDuperMain {
     }
 
     public static void onDisable() {
-        GlobalManager.getConfigAPI().saveLocationList(ConfigKey.CarpetDuperLoc.key, dupers);
+        GlobalManager.getDataStoreAPI().saveLocationList(DataKey.CarpetDuperLoc, dupers);
     }
 
     public static List<Location> getDupers() {

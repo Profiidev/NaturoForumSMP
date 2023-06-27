@@ -15,8 +15,8 @@ public class InvClick implements Listener {
         if(e.getCurrentItem().getItemMeta() == null)
             return;
         String display = e.getCurrentItem().getItemMeta().getDisplayName();
-        System.out.println(e.getCurrentItem().getItemMeta().getDisplayName());
-        GlobalManager.getInventoryManager().requestCallback(display, title, e);
+
         GlobalManager.getListenerManager().callListeners(Listeners.InvClick, e);
+        GlobalManager.getInventoryManager().requestCallback(display, title, e);
     }
 }

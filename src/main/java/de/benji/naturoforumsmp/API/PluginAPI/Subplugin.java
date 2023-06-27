@@ -2,7 +2,6 @@ package de.benji.naturoforumsmp.API.PluginAPI;
 
 public enum Subplugin {
     Brausebad("Brausebad"),
-    Headshop("Headshop"),
     Msg("Msg"),
     Sanddupe("Sanddupe"),
     Status("Status"),

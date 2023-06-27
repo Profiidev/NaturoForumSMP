@@ -1,4 +1,4 @@
-package de.benji.naturoforumsmp.Msg.Command;
+package de.benji.naturoforumsmp.Msg.Commands;
 
 import de.benji.naturoforumsmp.API.GlobalManager;
 import de.benji.naturoforumsmp.API.PluginAPI.Subplugin;

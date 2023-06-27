@@ -27,4 +27,15 @@ public class ItemTitles {
     public static final String status_AddPlayerToWhitelist = "§7Add Player to Whitelist";
 
     public static final String carpetDuper_Duper = "§6Carpet Duper";
+
+    public static final String npc_ChangeSell = "§gChange Item to sell and quantity";
+    public static final String npc_ChangePay = "§bChange Item that you get and quantity";
+    public static final String npc_RefillSell = "§gRefill items";
+    public static final String npc_ClaimPay = "§bClaim items";
+    public static final String npc_ChangeMob = "§6Change Shopmob";
+    public static final String npc_ChangeName = "§6Change Shopname";
+    public static final String npc_ChangeHeadRot = "§6Change Headrotation";
+    public static final String npc_DeleteShop = "§cDelete Shop";
+    public static final String npc_Trade = "§6Trade items";
+    public static final String npc_ChangeSettings = "§6Change Redeem Setting";
 }

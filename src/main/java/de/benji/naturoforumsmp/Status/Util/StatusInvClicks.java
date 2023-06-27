@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class StatusInvClicks {
-    static InvAPI invAPI = GlobalManager.getInvAPI();
+    private static final InvAPI invAPI = GlobalManager.getInvAPI();
 
     //Main Inv
     public static void close(InventoryClickEvent e) {

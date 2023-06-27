@@ -11,7 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class SpawnElytraMain {
-    static ElytraManager elytraManager;
+    private static ElytraManager elytraManager;
 
     public static void onEnable() {
         elytraManager = new ElytraManager();

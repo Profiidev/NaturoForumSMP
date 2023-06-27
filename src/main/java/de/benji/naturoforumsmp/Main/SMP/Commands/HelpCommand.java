@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class HelpCommand implements CommandExecutor, TabCompleter {
-	
-	HashMap<String, Boolean> plugins = GlobalManager.getSubpluginManager().getAllSubpluginsStatus();
+
+	private final HashMap<String, Boolean> plugins = GlobalManager.getSubpluginManager().getAllSubpluginsStatus();
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -52,11 +52,6 @@ public class HelpCommand implements CommandExecutor, TabCompleter {
 							p.sendMessage("§6This Subplugin adds a fully funktional \"Brausebad\"");
 							p.sendMessage("§6It is craftable with Gas, Black Concrete and Glass");
 							p.sendMessage("§6Gas can be made in a Blast Furnace using Dragons Breath");
-							break;
-						}
-						case "headshop": {
-							p.sendMessage("§6With §e/headshop §6you can buy any Head you want");
-							p.sendMessage("§6Each Head costs 1 Diamond and to buy a Head you need a Downloadlink for a Skin");
 							break;
 						}
 						case "msg": {

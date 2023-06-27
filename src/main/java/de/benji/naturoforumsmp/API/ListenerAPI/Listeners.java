@@ -12,5 +12,7 @@ public enum Listeners {
     BlockBreak,
     BlockPlace,
     BlockDispense,
-    CommandPreprocess
+    CommandPreprocess,
+    EntityClick,
+    Click
 }

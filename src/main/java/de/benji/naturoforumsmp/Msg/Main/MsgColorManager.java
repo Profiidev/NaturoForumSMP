@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class MsgColorManager {
-    HashMap<UUID, MsgStyles[]> colors;
-    HashMap<UUID, UUID> lastMsg;
+    private HashMap<UUID, MsgStyles[]> colors;
+    private final HashMap<UUID, UUID> lastMsg;
 
     public MsgColorManager() {
         colors = new HashMap<>();
@@ -13,7 +13,7 @@ public class MsgColorManager {
     }
 
     public void setColor(UUID uuid, MsgInvs.MsgStylePos msgStylePos, boolean isColor, char c) {
-        MsgStyles style = MsgStyles.fromChar(c);
+        MsgStyles style = MsgStyles.fromString(String.valueOf(c));
 
         if(!colors.containsKey(uuid))
             colors.put(uuid, new MsgStyles[]{MsgStyles.None, MsgStyles.None, MsgStyles.None, MsgStyles.None, MsgStyles.None, MsgStyles.None});

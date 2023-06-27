@@ -13,11 +13,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.*;
 
 public class ElytraManager {
-    List<UUID> hasElytra;
-    List<UUID> hasBoosted;
-    HashMap<UUID, ItemStack> chestplates;
+    private final List<UUID> hasElytra;
+    private final List<UUID> hasBoosted;
+    private final HashMap<UUID, ItemStack> chestplates;
 
-    SpawnElytraTicker spawnElytraTicker;
+    private final SpawnElytraTicker spawnElytraTicker;
 
     public ElytraManager() {
         hasElytra = new ArrayList<>();

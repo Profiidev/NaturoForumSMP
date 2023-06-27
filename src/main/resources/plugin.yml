@@ -12,7 +12,6 @@ commands:
   setmsgcolor:
   r:
     usage: "/r <message>"
-  headshop:
   placebrausebad:
   npc:
   smphelp:
@@ -20,3 +19,5 @@ commands:
   ping:
   calc:
   portal:
+  home:
+  sethome:

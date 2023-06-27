@@ -26,7 +26,7 @@ public enum MsgStyles {
         this.key = key;
     }
 
-    public static MsgStyles fromChar(char c) {
+    public static MsgStyles fromString(String c) {
         for(MsgStyles style: MsgStyles.values()) {
             if(style.key.equals(String.valueOf(c)))
                 return style;

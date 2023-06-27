@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class SMPJoin {
-    static List<UUID> joined = Main.getJoined();
+    private static final List<UUID> joined = Main.getJoined();
     public static void onJoin(Event event) {
         PlayerJoinEvent e = (PlayerJoinEvent) event;
         Player p = e.getPlayer();

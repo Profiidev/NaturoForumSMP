@@ -1,7 +1,6 @@
 package de.benji.naturoforumsmp.API;
 
-import de.benji.naturoforumsmp.API.ConfigAPI.ConfigAPI;
-import de.benji.naturoforumsmp.API.DatsBaseAPI.DatabaseAPI;
+import de.benji.naturoforumsmp.API.DataStoreAPI.DataStoreAPI;
 import de.benji.naturoforumsmp.API.InputAPI.InputManager;
 import de.benji.naturoforumsmp.API.InvAPI.InvAPI;
 import de.benji.naturoforumsmp.API.InvAPI.InventoryManager;
@@ -18,13 +17,12 @@ public class GlobalManager {
     private static Scoreboard board;
 
     private static InvAPI invAPI;
-    private static ConfigAPI configAPI;
     private static SubpluginManager subpluginManager;
     private static InventoryManager inventoryManager;
     private static PermissionManager permissionManager;
     private static ListenerManager listenerManager;
     private static InputManager inputManager;
-    private static DatabaseAPI databaseAPI;
+    private static DataStoreAPI dataStoreAPI;
     private  static boolean databaseEnable = false;
 
     public static JavaPlugin getInstance() {
@@ -38,9 +36,6 @@ public class GlobalManager {
     }
     public static InvAPI getInvAPI() {
         return invAPI;
-    }
-    public static ConfigAPI getConfigAPI() {
-        return configAPI;
     }
     public static SubpluginManager getSubpluginManager() {
         return subpluginManager;
@@ -57,8 +52,8 @@ public class GlobalManager {
     public static InputManager getInputManager() {
         return inputManager;
     }
-    public static DatabaseAPI getDatabaseAPI() {
-        return databaseAPI;
+    public static DataStoreAPI getDataStoreAPI() {
+        return dataStoreAPI;
     }
     public static boolean isDatabaseEnable() {
         return databaseEnable;
@@ -76,9 +71,6 @@ public class GlobalManager {
     public static void setInvAPI(InvAPI invAPI) {
         GlobalManager.invAPI = invAPI;
     }
-    public static void setConfigAPI(ConfigAPI configAPI) {
-        GlobalManager.configAPI = configAPI;
-    }
     public static void setSubpluginManager(SubpluginManager subpluginManager) {
         GlobalManager.subpluginManager = subpluginManager;
     }
@@ -94,8 +86,8 @@ public class GlobalManager {
     public static void setInputManager(InputManager inputManager) {
         GlobalManager.inputManager = inputManager;
     }
-    public static void setDatabaseAPI(DatabaseAPI databaseAPI) {
-        GlobalManager.databaseAPI = databaseAPI;
+    public static void setDataStoreAPI(DataStoreAPI dataStoreAPI) {
+        GlobalManager.dataStoreAPI = dataStoreAPI;
     }
     public static void setDatabaseEnable(boolean databaseEnable) {
         GlobalManager.databaseEnable = databaseEnable;

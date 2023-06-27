@@ -13,4 +13,8 @@ public class InvTitles {
 
     public static final String msg_ColorInv = "Select color for ";
     public static final String msg_StyleInv = "Select style for ";
+
+    public static final String npcs_Shops = "§6Shop";
+    public static final String npcs_Mob = "§6Select a mob";
+    public static final String npcs_Settings = "§6Redeem Settings";
 }

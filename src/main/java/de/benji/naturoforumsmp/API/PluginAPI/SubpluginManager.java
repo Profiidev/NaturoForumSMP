@@ -22,7 +22,7 @@ public class SubpluginManager {
     public void startAllEnabledSubplugins() {
         for(SubpluginInfo data: subPlugins.values()) {
             if(data.isEnabled && data.subpluginEnable != null) {
-                data.subpluginEnable.enable();
+                data.subpluginEnable.run();
             }
         }
     }
@@ -34,7 +34,7 @@ public class SubpluginManager {
         if(data.subpluginEnable == null)
             return;
 
-        data.subpluginEnable.enable();
+        data.subpluginEnable.run();
     }
 
     public void disableSubplugin(Subplugin subplugin) {
@@ -44,14 +44,14 @@ public class SubpluginManager {
         if(data.subpluginDisable == null)
             return;
 
-        data.subpluginDisable.disable();
+        data.subpluginDisable.run();
     }
 
     public void disableAllSubplugins() {
         for(SubpluginInfo data: subPlugins.values()) {
             if(data.subpluginDisable == null || !data.isEnabled)
                 continue;
-            data.subpluginDisable.disable();
+            data.subpluginDisable.run();
         }
     }
 

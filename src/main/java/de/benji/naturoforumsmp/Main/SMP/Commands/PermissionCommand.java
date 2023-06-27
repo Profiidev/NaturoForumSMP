@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class PermissionCommand implements CommandExecutor, TabCompleter {
-    PermissionManager permissionManager = GlobalManager.getPermissionManager();
+    private PermissionManager permissionManager = GlobalManager.getPermissionManager();
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         permissionManager = GlobalManager.getPermissionManager();
@@ -29,8 +29,8 @@ public class PermissionCommand implements CommandExecutor, TabCompleter {
                 if(t != null) {
                     if(args[1].equals("list")) {
                         p.sendMessage("§a" + t.getName() + "§6 has the following Permissions:");
-                        for(String perm: permissionManager.getPlayerPermissions(t)) {
-                            p.sendMessage(perm);
+                        for(Permission perm: permissionManager.getPlayerPermissions(t)) {
+                            p.sendMessage(perm.key);
                         }
                     } else {
                         p.sendMessage("§6Please use §f/permission <Player> add/remove/list <permission>");
@@ -99,9 +99,9 @@ public class PermissionCommand implements CommandExecutor, TabCompleter {
                     switch (args[1]) {
                         case "add": {
                             try {
-                                List<String> perm = permissionManager.getPlayerPermissions(Objects.requireNonNull(Bukkit.getPlayer(args[0])).getUniqueId());
+                                List<Permission> perm = permissionManager.getPlayerPermissions(Objects.requireNonNull(Bukkit.getPlayer(args[0])).getUniqueId());
                                 for(Permission p: Permission.values()) {
-                                    if(!perm.contains(p.key)) {
+                                    if(!perm.contains(p)) {
                                         tab.add(p.key);
                                     }
                                 }
@@ -112,8 +112,10 @@ public class PermissionCommand implements CommandExecutor, TabCompleter {
                         }
                         case "remove": {
                             try {
-                                List<String> perm = permissionManager.getPlayerPermissions(Objects.requireNonNull(Bukkit.getPlayer(args[0])).getUniqueId());
-                                tab.addAll(perm);
+                                List<Permission> perm = permissionManager.getPlayerPermissions(Objects.requireNonNull(Bukkit.getPlayer(args[0])).getUniqueId());
+                                perm.forEach(p -> {
+                                    tab.add(p.key);
+                                });
                             } catch (Exception ignored) {}
 
                             StringUtil.copyPartialMatches(args[2], tab, completions);

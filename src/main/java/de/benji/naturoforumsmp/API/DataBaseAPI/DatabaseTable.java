@@ -1,4 +1,4 @@
-package de.benji.naturoforumsmp.API.DatsBaseAPI;
+package de.benji.naturoforumsmp.API.DataBaseAPI;
 
 public enum DatabaseTable {
     UUIDs("uuids"),

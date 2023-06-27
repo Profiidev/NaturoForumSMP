@@ -6,13 +6,13 @@ import java.util.*;
 
 public class PermissionManager {
 
-    HashMap<UUID, List<String>> permissions;
+    private final HashMap<UUID, List<Permission>> permissions;
 
     public PermissionManager() {
         permissions = new HashMap<>();
     }
 
-    public PermissionManager(HashMap<UUID, List<String>> permissions) {
+    public PermissionManager(HashMap<UUID, List<Permission>> permissions) {
         this.permissions = permissions;
     }
 
@@ -32,32 +32,32 @@ public class PermissionManager {
 
     public void addPlayerPermission(Player p, Permission per) {
         if(permissions.containsKey(p.getUniqueId())) {
-            List<String> perm = permissions.get(p.getUniqueId());
-            perm.add(per.key);
+            List<Permission> perm = permissions.get(p.getUniqueId());
+            perm.add(per);
             permissions.put(p.getUniqueId(), perm);
         } else {
-            permissions.put(p.getUniqueId(), Collections.singletonList(per.key));
+            permissions.put(p.getUniqueId(), Collections.singletonList(per));
         }
     }
 
     public void addPlayerPermission(UUID uuid, Permission per) {
         if(permissions.containsKey(uuid)) {
-            List<String> perm = permissions.get(uuid);
-            perm.add(per.key);
+            List<Permission> perm = permissions.get(uuid);
+            perm.add(per);
             permissions.put(uuid, perm);
         } else {
-            permissions.put(uuid, Collections.singletonList(per.key));
+            permissions.put(uuid, Collections.singletonList(per));
         }
     }
 
     public void removePlayerPermission(Player p, Permission per) {
         if(permissions.containsKey(p.getUniqueId())) {
-            List<String> perm = permissions.get(p.getUniqueId());
+            List<Permission> perm = permissions.get(p.getUniqueId());
             if(perm == null)
-                System.out.println("hi");
-            List<String> perm1 = new ArrayList<>();
-            for(String s: perm) {
-                if(!Objects.equals(s, per.key)) {
+                return;
+            List<Permission> perm1 = new ArrayList<>();
+            for(Permission s: perm) {
+                if(!Objects.equals(s, per)) {
                     perm1.add(s);
                 }
             }
@@ -67,16 +67,16 @@ public class PermissionManager {
 
     public void removePlayerPermission(UUID uuid, Permission per) {
         if(permissions.containsKey(uuid)) {
-            List<String> perm = permissions.get(uuid);
-            perm.remove(per.key);
+            List<Permission> perm = permissions.get(uuid);
+            perm.remove(per);
             permissions.put(uuid, perm);
         }
     }
 
-    public List<String> getPlayerPermissions(Player p) {
+    public List<Permission> getPlayerPermissions(Player p) {
         if(!permissions.isEmpty()) {
             if(permissions.containsKey(p.getUniqueId())) {
-                return  permissions.get(p.getUniqueId());
+                return permissions.get(p.getUniqueId());
             } else {
                 return new ArrayList<>();
             }
@@ -85,7 +85,7 @@ public class PermissionManager {
         }
     }
 
-    public List<String> getPlayerPermissions(UUID uuid) {
+    public List<Permission> getPlayerPermissions(UUID uuid) {
         if(!permissions.isEmpty()) {
             if(permissions.containsKey(uuid)) {
                 return  permissions.get(uuid);
@@ -97,7 +97,7 @@ public class PermissionManager {
         }
     }
 
-    public HashMap<UUID, List<String>> getPermissions() {
+    public HashMap<UUID, List<Permission>> getPermissions() {
         return permissions;
     }
 }
