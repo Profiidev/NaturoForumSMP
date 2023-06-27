@@ -12,7 +12,8 @@ public enum DataKey {
     StatusAccess("Status.Access"),
     StatusCaches("Status.Caches"),
     StatusAfk("Status.Afk"),
-    SMPPermissions("SMP.Permissions");
+    SMPPermissions("SMP.Permissions"),
+    Homes("Homes");
 
     public final String configKey;
     public final String databaseKey;
