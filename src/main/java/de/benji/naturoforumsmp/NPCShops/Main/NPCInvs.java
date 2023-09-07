@@ -62,9 +62,9 @@ public class NPCInvs {
     }
 
     public static Inventory getSettingsInv(UUID uuid) {
-        Inventory i = invAPI.createInv(3, InvTitles.npcs_Settings, true, 22);
+        Inventory i = invAPI.createInv(3, InvTitles.npcs_Settings, InvEnums.Full, true, 22);
 
-        if(NPCShopsMain.getNpcManager().getRedeemTypes() == null)
+        if(NPCShopsMain.getNpcManager().getRedeemType(uuid) == null)
             NPCShopsMain.getNpcManager().setRedeemType(uuid, NPCManager.ItemRedeemType.None);
 
         NPCManager.ItemRedeemType type = NPCShopsMain.getNpcManager().getRedeemType(uuid);
@@ -93,6 +93,7 @@ public class NPCInvs {
         registerOwnerInvListeners();
         registerShopInvClicks();
         registerMobInvClicks();
+        registerSettingsInvClicks();
     }
 
     private static void registerOwnerInvListeners() {
@@ -387,11 +388,25 @@ public class NPCInvs {
                 NPCManager manager = NPCShopsMain.getNpcManager();
                 NPC npc = manager.findNPCByID(manager.getLastOpenNPC(p.getUniqueId()));
 
-                manager.createNPC(type.type, npc.getBukkitEntity().getLocation(), npc.getOwner(), npc.getSellItem(), npc.getPayItem(), npc.getItemsPerSell(), npc.getItemsPerPay(), npc.getSellStock(), npc.getPayStock(), npc.getCustomName().getString());
+                manager.createNPC(type.type, npc.getBukkitEntity().getLocation(), npc.getOwner(), npc.getSellItem(), npc.getPayItem(), npc.getItemsPerSell(), npc.getItemsPerPay(), npc.getSellStock(), npc.getPayStock(), npc.getCustomName().getString(), npc.getYHeadRot());
                 manager.deleteNPC(npc);
 
                 p.closeInventory();
             }, Subplugin.NPCShops);
         }
+    }
+
+    private static void registerSettingsInvClicks() {
+        InventoryManager im = GlobalManager.getInventoryManager();
+        im.addItem(ItemTitles.closeItem, InvTitles.npcs_Settings, e -> {
+            e.getWhoClicked().closeInventory();
+        }, Subplugin.NPCShops);
+        im.addItem(ItemTitles.npc_ChangeSettings, InvTitles.npcs_Settings, e -> {
+            UUID uuid = e.getWhoClicked().getUniqueId();
+            NPCManager.ItemRedeemType type = NPCShopsMain.getNpcManager().getRedeemType(uuid);
+            type = type == NPCManager.ItemRedeemType.None ? NPCManager.ItemRedeemType.EC : NPCManager.ItemRedeemType.None;
+            NPCShopsMain.getNpcManager().setRedeemType(uuid, type);
+            e.getWhoClicked().getOpenInventory().setItem(13, invAPI.createIS(Material.CHEST, ItemTitles.npc_ChangeSettings, Arrays.asList("§" + (type.equals(NPCManager.ItemRedeemType.None) ? "d" : "8") + "None", "§" + (type.equals(NPCManager.ItemRedeemType.EC) ? "d" : "8") + "In Enderchest")));
+        }, Subplugin.NPCShops);
     }
 }

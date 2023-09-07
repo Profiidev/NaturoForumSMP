@@ -32,7 +32,7 @@ public class StatusInvs {
         boolean hasPermissions = uuid.equals(UUIDs.benji) || uuid.equals(UUIDs.maxi) || permissionManager.hasPlayerPermission(uuid, Permission.StatusControl);
         boolean autoAFKEnabled = statusManager.getStatusCaches().get(uuid).afkEnabled;
         boolean changeOwn = statusManager.getStatusCaches().get(uuid).changeOwnStatus;
-        boolean afkStatusSet = statusManager.getAfkStatusKey() != null;
+        boolean afkStatusSet = !statusManager.getAfkStatusKey().equals("");
 
         Status afkStatusData = null;
         if(afkStatusSet)

@@ -7,6 +7,7 @@ import de.benji.naturoforumsmp.NPCShops.Main.NPCShopsMain;
 import de.benji.naturoforumsmp.Status.Util.Status;
 import de.benji.naturoforumsmp.Status.Util.StatusCache;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -35,6 +36,7 @@ public class ConfigAPI {
     }
 
     public void saveLocationList(String key, List<Location> list) {
+        plugin.getConfig().set(key, "");
         for(int i = 0; i < list.size(); i++) {
             Location l = list.get(i);
             plugin.getConfig().set(key + "." + i + ".world", l.getWorld().getName());
@@ -47,10 +49,12 @@ public class ConfigAPI {
     }
 
     public void saveStringBooleanHashMap(String key, HashMap<String, Boolean> map) {
+        plugin.getConfig().set(key, "");
         map.keySet().forEach(s -> plugin.getConfig().set(key + "." + s, map.get(s)));
     }
 
     public void saveStringStatusHashMap(String key, HashMap<String, Status> map) {
+        plugin.getConfig().set(key, "");
         map.keySet().forEach(k -> {
             Status status = map.get(k);
             plugin.getConfig().set(key + "." + k + ".display", status.display);
@@ -60,6 +64,7 @@ public class ConfigAPI {
     }
 
     public void saveStringUUIDBooleanHashMapHashMap(String key, HashMap<String, HashMap<UUID, Boolean>> map) {
+        plugin.getConfig().set(key, "");
         map.keySet().forEach(k -> {
             HashMap<UUID, Boolean> perms = map.get(k);
             perms.keySet().forEach(uuid -> {
@@ -69,6 +74,7 @@ public class ConfigAPI {
     }
 
     public void saveUUIDStatusCacheHashMap(String key, HashMap<UUID, StatusCache> map) {
+        plugin.getConfig().set(key, "");
         map.keySet().forEach(k -> {
             StatusCache cache = map.get(k);
             plugin.getConfig().set(key + "." + k + ".current", cache.currentStatus);
@@ -78,18 +84,20 @@ public class ConfigAPI {
     }
 
     public void saveUUIDMsgStylesArrayHashMap(String key, HashMap<UUID, MsgStyles[]> map) {
+        plugin.getConfig().set(key, "");
         map.keySet().forEach(k -> {
             MsgStyles[] style = map.get(k);
-            plugin.getConfig().set(key + "." + k + ".style1", style[0]);
-            plugin.getConfig().set(key + "." + k + ".style2", style[1]);
-            plugin.getConfig().set(key + "." + k + ".style3", style[2]);
-            plugin.getConfig().set(key + "." + k + ".style4", style[3]);
-            plugin.getConfig().set(key + "." + k + ".style5", style[4]);
-            plugin.getConfig().set(key + "." + k + ".style6", style[5]);
+            plugin.getConfig().set(key + "." + k + ".style1", style[0].key);
+            plugin.getConfig().set(key + "." + k + ".style2", style[1].key);
+            plugin.getConfig().set(key + "." + k + ".style3", style[2].key);
+            plugin.getConfig().set(key + "." + k + ".style4", style[3].key);
+            plugin.getConfig().set(key + "." + k + ".style5", style[4].key);
+            plugin.getConfig().set(key + "." + k + ".style6", style[5].key);
         });
     }
 
     public void saveUUIDPermissionListHashMap(String key, HashMap<UUID, List<Permission>> map) {
+        plugin.getConfig().set(key, "");
         map.keySet().forEach(k -> {
             List<Permission> perms = map.get(k);
             Arrays.asList(Permission.values()).forEach(perm -> {
@@ -99,14 +107,19 @@ public class ConfigAPI {
     }
 
     public void saveUUIDStringHashMap(String key, HashMap<UUID, String> map) {
+        plugin.getConfig().set(key, "");
         map.keySet().forEach(k -> plugin.getConfig().set(key + "." + k.toString(), map.get(k)));
     }
 
     public void saveNPCList(String key, List<NPC> list) {
+        plugin.getConfig().set(key, "");
         AtomicInteger i = new AtomicInteger();
-        list.forEach(npc -> {
-            plugin.getConfig().set(key + "." + i.get() + ".owner", npc.getOwner());
-            plugin.getConfig().set(key + "." + i.get() + ".type", npc.getBukkitLivingEntity().getType().name());
+
+        List<NPC> newList = new ArrayList<>(list);
+
+        newList.forEach(npc -> {
+            plugin.getConfig().set(key + "." + i.get() + ".owner", npc.getOwner().toString());
+            plugin.getConfig().set(key + "." + i.get() + ".type", npc.getType().toShortString());
             plugin.getConfig().set(key + "." + i.get() + ".sellItem", npc.getSellItem().name());
             plugin.getConfig().set(key + "." + i.get() + ".payItem", npc.getPayItem().name());
             plugin.getConfig().set(key + "." + i.get() + ".itemsPerSell", npc.getItemsPerSell());
@@ -115,17 +128,20 @@ public class ConfigAPI {
             plugin.getConfig().set(key + "." + i.get() + ".payStock", npc.getPayStock());
             plugin.getConfig().set(key + "." + i.get() + ".name", npc.getCustomName().getString());
 
-            Location loc = npc.getBukkitMob().getLocation();
+            Location loc = npc.getBukkitEntity().getLocation();
             plugin.getConfig().set(key + "." + i.get() + ".world", loc.getWorld().getName());
             plugin.getConfig().set(key + "." + i.get() + ".x", loc.x());
             plugin.getConfig().set(key + "." + i.get() + ".y", loc.y());
             plugin.getConfig().set(key + "." + i.get() + ".z", loc.z());
             plugin.getConfig().set(key + "." + i.get() + ".yaw", npc.getYHeadRot());
             i.getAndIncrement();
+
+            NPCShopsMain.getNpcManager().deleteNPC(npc);
         });
     }
 
     public void saveUUIDLocationHashMap(String key, HashMap<UUID, Location> map) {
+        plugin.getConfig().set(key, "");
         map.keySet().forEach(k -> {
             Location loc = map.get(k);
             plugin.getConfig().set(key + "." + k + ".world", loc.getWorld().getName());
@@ -151,9 +167,13 @@ public class ConfigAPI {
 
     public List<Location> loadLocationList(String key) {
         List<Location> list = new ArrayList<>();
+
+        if(plugin.getConfig().getConfigurationSection(key) == null)
+            return list;
+
         plugin.getConfig().getConfigurationSection(key).getKeys(false).forEach(k -> {
             list.add(new Location(
-                    Bukkit.getWorld(plugin.getConfig().getString(key + "." + k + ".name")),
+                    Bukkit.getWorld(plugin.getConfig().getString(key + "." + k + ".world")),
                     plugin.getConfig().getDouble(key + "." + k + ".x"),
                     plugin.getConfig().getDouble(key + "." + k + ".y"),
                     plugin.getConfig().getDouble(key + "." + k + ".z"),
@@ -165,6 +185,10 @@ public class ConfigAPI {
 
     public HashMap<String, Boolean> loadStringBooleanHashMap(String key) {
         HashMap<String, Boolean> map = new HashMap<>();
+
+        if(plugin.getConfig().getConfigurationSection(key) == null)
+            return map;
+
         plugin.getConfig().getConfigurationSection(key).getKeys(false).forEach(k -> {
             map.put(k, plugin.getConfig().getBoolean(key + "." + k));
         });
@@ -173,6 +197,10 @@ public class ConfigAPI {
 
     public HashMap<String, Status> loadStringStatusHashMap(String key) {
         HashMap<String, Status> map = new HashMap<>();
+
+        if(plugin.getConfig().getConfigurationSection(key) == null)
+            return map;
+
         plugin.getConfig().getConfigurationSection(key).getKeys(false).forEach(k -> {
             map.put(k, new Status(k,
                     plugin.getConfig().getString(key + "." + k + ".display"),
@@ -184,6 +212,10 @@ public class ConfigAPI {
 
     public HashMap<String, HashMap<UUID, Boolean>> loadStringUUIDBooleanHashMapHashMap(String key) {
         HashMap<String, HashMap<UUID, Boolean>> map = new HashMap<>();
+
+        if(plugin.getConfig().getConfigurationSection(key) == null)
+            return map;
+
         plugin.getConfig().getConfigurationSection(key).getKeys(false).forEach(k -> {
             HashMap<UUID, Boolean> data = new HashMap<>();
             plugin.getConfig().getConfigurationSection(key + "." + k).getKeys(false).forEach(uuid -> {
@@ -196,6 +228,10 @@ public class ConfigAPI {
 
     public HashMap<UUID, StatusCache> loadUUIDStatusCacheHashMap(String key) {
         HashMap<UUID, StatusCache> map = new HashMap<>();
+
+        if(plugin.getConfig().getConfigurationSection(key) == null)
+            return map;
+
         plugin.getConfig().getConfigurationSection(key).getKeys(false).forEach(k -> {
             map.put(UUID.fromString(k), new StatusCache(
                     new Status("", "", "", true), "", "", new HashMap<>(), 0,
@@ -208,6 +244,10 @@ public class ConfigAPI {
 
     public HashMap<UUID, MsgStyles[]> loadUUIDMsgStylesArrayHashMap(String key) {
         HashMap<UUID, MsgStyles[]> map = new HashMap<>();
+
+        if(plugin.getConfig().getConfigurationSection(key) == null)
+            return map;
+
         plugin.getConfig().getConfigurationSection(key).getKeys(false).forEach(k -> {
             map.put(UUID.fromString(k), new MsgStyles[]{
                     MsgStyles.fromString(plugin.getConfig().getString(key + "." + k + ".style1")),
@@ -222,6 +262,10 @@ public class ConfigAPI {
 
     public HashMap<UUID, List<Permission>> loadUUIDPermissionListHashMap(String key) {
         HashMap<UUID, List<Permission>> map = new HashMap<>();
+
+        if(plugin.getConfig().getConfigurationSection(key) == null)
+            return map;
+
         plugin.getConfig().getConfigurationSection(key).getKeys(false).forEach(k -> {
             List<Permission> perms = new ArrayList<>();
             plugin.getConfig().getConfigurationSection(key + "." + k).getKeys(false).forEach(perm -> {
@@ -235,6 +279,10 @@ public class ConfigAPI {
 
     public HashMap<UUID, String> loadUUIDStringHashMap(String key) {
         HashMap<UUID, String> map = new HashMap<>();
+
+        if(plugin.getConfig().getConfigurationSection(key) == null)
+            return map;
+
         plugin.getConfig().getConfigurationSection(key).getKeys(false).forEach(k -> {
             map.put(UUID.fromString(k), plugin.getConfig().getString(key + "." + k));
         });
@@ -242,9 +290,12 @@ public class ConfigAPI {
     }
 
     public void loadNPCList(String key) {
+        if(plugin.getConfig().getConfigurationSection(key) == null)
+            return;
+
         plugin.getConfig().getConfigurationSection(key).getKeys(false).forEach(k -> {
             NPCShopsMain.getNpcManager().createNPC(
-                    EntityType.VILLAGER,
+                    (EntityType<? extends Mob>) EntityType.byString(plugin.getConfig().getString(key + "." + k + ".type")).get(),
                     new Location(
                             Bukkit.getWorld(plugin.getConfig().getString(key + "." + k + ".world")),
                             plugin.getConfig().getDouble(key + "." + k + ".x"),
@@ -257,12 +308,17 @@ public class ConfigAPI {
                     plugin.getConfig().getInt(key + "." + k + ".itemsPerPay"),
                     plugin.getConfig().getInt(key + "." + k + ".sellStock"),
                     plugin.getConfig().getInt(key + "." + k + ".payStock"),
-                    plugin.getConfig().getString(key + "." + k + ".name"));
+                    plugin.getConfig().getString(key + "." + k + ".name"),
+                    (float) plugin.getConfig().getDouble(key + "." + k + ".yaw"));
         });
     }
 
     public HashMap<UUID, Location> loadUUIDLocationHashMap(String key) {
         HashMap<UUID, Location> map = new HashMap<>();
+
+        if(plugin.getConfig().getConfigurationSection(key) == null)
+            return map;
+
         plugin.getConfig().getConfigurationSection(key).getKeys(false).forEach(k -> {
             map.put(UUID.fromString(k), new Location(
                     Bukkit.getWorld(plugin.getConfig().getString(key + "." + k + ".world")),

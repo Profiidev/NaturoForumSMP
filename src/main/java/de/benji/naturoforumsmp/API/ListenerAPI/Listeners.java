@@ -14,5 +14,6 @@ public enum Listeners {
     BlockDispense,
     CommandPreprocess,
     EntityClick,
-    Click
+    Click,
+    Move
 }

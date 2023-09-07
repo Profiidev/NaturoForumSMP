@@ -31,15 +31,16 @@ public class AFKTicker {
                     StatusCache cache = caches.get(p.getUniqueId());
                     if(cache == null)
                         caches.put(p.getUniqueId(), new StatusCache(new Status("", "", "", true), "", "", new HashMap<>(), 1, "", "", false, true, true));
+                    cache = caches.get(p.getUniqueId());
 
-                    if(afkStatusKey == null)
+                    if(afkStatusKey.equals(""))
                         continue;
                     cache.afkTime++;
                     if(!(cache.afkTime >= 60*5 && cache.afkEnabled && !cache.isAFK))
                         continue;
 
                     cache.isAFK = true;
-                    statusManager.setPlayerStatus(afkStatusKey, p);
+                    statusManager.setPlayerStatusNotCurrent(afkStatusKey, p);
                 }
             }
         }.runTaskTimer(GlobalManager.getInstance(), 1, 20);

@@ -1,7 +1,6 @@
 package de.benji.naturoforumsmp.Main;
 
 import de.benji.naturoforumsmp.API.ConfigAPI.ConfigAPI;
-import de.benji.naturoforumsmp.API.DataBaseAPI.MySQL;
 import de.benji.naturoforumsmp.API.DataStoreAPI.DataKey;
 import de.benji.naturoforumsmp.API.DataStoreAPI.DataStoreAPI;
 import de.benji.naturoforumsmp.API.GlobalManager;
@@ -26,6 +25,7 @@ import de.benji.naturoforumsmp.Main.SMP.TPS.TpsTicker;
 import de.benji.naturoforumsmp.Msg.Commands.R;
 import de.benji.naturoforumsmp.Msg.Commands.SetMsgColor;
 import de.benji.naturoforumsmp.Msg.Main.MsgMain;
+import de.benji.naturoforumsmp.NPCShops.Commands.NPCCommand;
 import de.benji.naturoforumsmp.NPCShops.Main.NPCShopsMain;
 import de.benji.naturoforumsmp.Sanddupe.Main.SanddupeMain;
 import de.benji.naturoforumsmp.SpawnElytra.Main.SpawnElytraMain;
@@ -47,6 +47,11 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        boolean databaseEnabled = getConfig().getBoolean("Database.enabled");
+        getConfig().set("Database.enabled", databaseEnabled);
+        saveConfig();
+
+        GlobalManager.setDatabaseEnable(databaseEnabled);
         GlobalManager.setInstance(this);
         GlobalManager.setPluginManager(Bukkit.getPluginManager());
         GlobalManager.setBoard(Bukkit.getScoreboardManager().getMainScoreboard());
@@ -56,7 +61,7 @@ public final class Main extends JavaPlugin {
         GlobalManager.setPermissionManager(new PermissionManager());
         GlobalManager.setListenerManager(new ListenerManager());
         GlobalManager.setInputManager(new InputManager());
-        GlobalManager.setDataStoreAPI(new DataStoreAPI(true, new ConfigAPI(this), new MySQL("212.87.212.2", 3306, "NaturoForumSMP_Test", "naturo", "duhomo88")));
+        GlobalManager.setDataStoreAPI(new DataStoreAPI(GlobalManager.isDatabaseEnable(), new ConfigAPI(this)));
 
         enableMain();
 
@@ -71,7 +76,7 @@ public final class Main extends JavaPlugin {
         subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.NPCShops.key) != null ? plugins.get(Subplugin.NPCShops.key) : false, true, Subplugin.NPCShops, NPCShopsMain::onEnable, NPCShopsMain::onDisable));
         subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.CarpetDuper.key) != null ? plugins.get(Subplugin.CarpetDuper.key) : false, false, Subplugin.CarpetDuper, CarpetDuperMain::onEnable, CarpetDuperMain::onDisable));
         subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.SpawnElytra.key) != null ? plugins.get(Subplugin.SpawnElytra.key) : false, false, Subplugin.SpawnElytra, SpawnElytraMain::onEnable, SpawnElytraMain::onDisable));
-        subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.Homes.key) != null ? plugins.get(Subplugin.Homes.key) : false, true, Subplugin.Homes, HomesMain::onEnable, HomesMain::onDisable));
+        subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.Homes.key) != null ? plugins.get(Subplugin.Homes.key) : false, false, Subplugin.Homes, HomesMain::onEnable, HomesMain::onDisable));
         subpluginManager.startAllEnabledSubplugins();
 
         registerCommandsAndListeners();
@@ -93,13 +98,14 @@ public final class Main extends JavaPlugin {
         getCommand("ping").setExecutor(new PingCommand());
         getCommand("calc").setExecutor(new CalculatorCommand());
         getCommand("portal").setExecutor(new PortalCommand());
+
+        //SUBPLUGIN
+        getCommand("status").setExecutor(new StatusCommand());
         getCommand("setmsgcolor").setExecutor(new SetMsgColor());
         getCommand("r").setExecutor(new R());
         getCommand("home").setExecutor(new Home());
         getCommand("sethome").setExecutor(new SetHome());
-
-        //SUBPLUGIN
-        getCommand("status").setExecutor(new StatusCommand());
+        getCommand("npc").setExecutor(new NPCCommand());
 
         PluginManager pluginManager = GlobalManager.getPluginManager();
         pluginManager.registerEvents(new Join(), GlobalManager.getInstance());
@@ -115,6 +121,7 @@ public final class Main extends JavaPlugin {
         pluginManager.registerEvents(new CommandPreprocess(), GlobalManager.getInstance());
         pluginManager.registerEvents(new EntityClick(), GlobalManager.getInstance());
         pluginManager.registerEvents(new Click(), GlobalManager.getInstance());
+        pluginManager.registerEvents(new PlayerMove(), GlobalManager.getInstance());
     }
 
     private void enableMain() {

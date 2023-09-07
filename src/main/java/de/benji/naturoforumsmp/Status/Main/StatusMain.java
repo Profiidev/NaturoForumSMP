@@ -7,6 +7,7 @@ import de.benji.naturoforumsmp.API.ListenerAPI.ListenerManager;
 import de.benji.naturoforumsmp.API.ListenerAPI.Listeners;
 import de.benji.naturoforumsmp.API.PluginAPI.Subplugin;
 import de.benji.naturoforumsmp.Status.Listener.StatusInvClick;
+import de.benji.naturoforumsmp.Status.Listener.StatusMove;
 import de.benji.naturoforumsmp.Status.Util.Status;
 import de.benji.naturoforumsmp.Status.Util.StatusCache;
 import de.benji.naturoforumsmp.Status.Util.StatusInvs;
@@ -24,6 +25,7 @@ public class StatusMain {
 
         ListenerManager lm = GlobalManager.getListenerManager();
         lm.addCallback(Subplugin.Status, Listeners.InvClick, StatusInvClick::onClick);
+        lm.addCallback(Subplugin.Status, Listeners.Move, StatusMove::onMove);
 
         StatusInvs.registerInvClicks();
 

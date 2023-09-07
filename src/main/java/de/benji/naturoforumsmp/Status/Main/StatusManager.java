@@ -27,6 +27,10 @@ public class StatusManager {
         statusCaches.get(p.getUniqueId()).currentStatus = statusKey;
     }
 
+    public void setPlayerStatusNotCurrent(String statusKey, Player p) {
+        setPlayerPrefixSuffix("§7[§r" + statusData.get(statusKey).display + "§7] ", null, p);
+    }
+
     public static void setPlayerPrefixSuffix(String prefix, String suffix, Player p) {
         try {
             Scoreboard board = GlobalManager.getBoard();
@@ -63,6 +67,8 @@ public class StatusManager {
         this.statusCaches = statusCaches;
     }
     public void setAfkStatusKey(String afkStatusKey) {
+        if(afkStatusKey == null)
+            afkStatusKey = "";
         this.afkStatusKey = afkStatusKey;
     }
 }

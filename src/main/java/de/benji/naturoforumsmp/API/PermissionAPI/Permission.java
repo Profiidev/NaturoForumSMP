@@ -1,7 +1,7 @@
 package de.benji.naturoforumsmp.API.PermissionAPI;
 
 public enum Permission {
-    StatusControl("Status.Control");
+    StatusControl("Status_Control");
 
     public final String key;
 

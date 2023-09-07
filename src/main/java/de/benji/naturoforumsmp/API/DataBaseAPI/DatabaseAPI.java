@@ -139,7 +139,7 @@ public class DatabaseAPI {
             mySQL.addEntry(key,
                     Arrays.asList("key", "owner", "type", "sellItem", "payItem", "itemsPerSell", "itemsPerPay", "sellStock", "payStock", "name",
                     "world", "x", "y", "z", "yaw"),
-                    Arrays.asList(String.valueOf(i.get()), npc.getOwner().toString(), npc.getBukkitLivingEntity().getType().name(), npc.getSellItem().name(), npc.getPayItem().name(), String.valueOf(npc.getItemsPerSell()), String.valueOf(npc.getItemsPerPay()), String.valueOf(npc.getSellStock()), String.valueOf(npc.getPayStock()), npc.getCustomName().getString(),
+                    Arrays.asList(String.valueOf(i.get()), npc.getOwner().toString(), npc.getType().toShortString(), npc.getSellItem().name(), npc.getPayItem().name(), String.valueOf(npc.getItemsPerSell()), String.valueOf(npc.getItemsPerPay()), String.valueOf(npc.getSellStock()), String.valueOf(npc.getPayStock()), npc.getCustomName().getString(),
                     loc.getWorld().getName(), String.valueOf(loc.x()), String.valueOf(loc.y()), String.valueOf(loc.z()), String.valueOf(npc.getYHeadRot())));
             i.getAndIncrement();
         });

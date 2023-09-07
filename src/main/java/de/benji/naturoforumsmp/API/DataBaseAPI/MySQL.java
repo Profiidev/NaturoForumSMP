@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MySQL {
@@ -60,9 +61,13 @@ public class MySQL {
         }
     }
 
-    private void executeStatement(String statement) {
+    private void executeStatement(String statement, List<String> values) {
         try {
             PreparedStatement p = connection.prepareStatement(statement);
+            if(values != null)
+                for(int i = 0; i < values.size(); i++) {
+                    p.setString(i + 1, values.get(i));
+                }
             p.executeUpdate();
         } catch (SQLException e) {
             System.out.println(statement);
@@ -72,30 +77,37 @@ public class MySQL {
 
     public void createTable(String table, List<String> keys) {
         String key = String.join(",", keys);
-        executeStatement("CREATE TABLE IF NOT EXISTS " + table + " (" + key + ",PRIMARY KEY (`key`));");
+        executeStatement("CREATE TABLE IF NOT EXISTS " + table + " (" + key + ",PRIMARY KEY (`key`));", null);
     }
 
     public void clearTable(String table) {
-        executeStatement("DELETE FROM " + table + ";");
+        executeStatement("DELETE FROM " + table + ";", null);
     }
 
     public void addEntry(String table, List<String> keys, List<String> values) {
         String key = String.join("`,`", keys);
         key = "`" + key  + "`";
-        String value = String.join("','", values);
-        value = "'" + value + "'";
-        executeStatement("INSERT INTO " + table + " (" + key + ") VALUES (" + value + ");");
+        List<String> valuePlayholders = new ArrayList<>();
+        values.forEach(v -> valuePlayholders.add("?"));
+        String value = String.join(",", valuePlayholders);
+
+        executeStatement("INSERT INTO " + table + " (" + key + ") VALUES (" + value + ");", values);
     }
 
     public void addEntryWithDupe(String table, List<String> keys, List<String> values, List<String> onDupeKeys, List<String> onDupeValues) {
         String key = String.join("`,`", keys);
         key = "`" + key  + "`";
-        String value = String.join("','", values);
-        value = "'" + value + "'";
+        List<String> valuePlayholders = new ArrayList<>();
+        values.forEach(v -> valuePlayholders.add("?"));
+        String value = String.join(",", valuePlayholders);
         StringBuilder onDupe = new StringBuilder();
+        List<String> values1 = new ArrayList<>(values);
         for(int i = 0; i < onDupeKeys.size(); i++) {
-            onDupe.append("`").append(onDupeKeys.get(i)).append("`='").append(onDupeValues.get(i)).append("'");
+            onDupe.append(" `")
+                    .append(onDupeKeys.get(i))
+                    .append("`=?");
+            values1.add(onDupeValues.get(i));
         }
-        executeStatement("INSERT INTO " + table + " (" + key + ") VALUES (" + value + ") ON DUPLICATE KEY UPDATE " + onDupe + ";");
+        executeStatement("INSERT INTO " + table + " (" + key + ") VALUES (" + value + ") ON DUPLICATE KEY UPDATE" + onDupe + ";", values1);
     }
 }

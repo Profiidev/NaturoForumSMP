@@ -29,12 +29,13 @@ public class NPCManager {
         itemInput = new HashMap<>();
     }
 
-    public void createNPC(EntityType<? extends Mob> type, Location loc, UUID owner, Material sellItem, Material payItem, int itemsPerSell, int itemsPerPay, int sellStock, int payStock, String name) {
+    public void createNPC(EntityType<? extends Mob> type, Location loc, UUID owner, Material sellItem, Material payItem, int itemsPerSell, int itemsPerPay, int sellStock, int payStock, String name, float yHeadRot) {
         NPC npc = new NPC(type, loc, owner);
         npc.loadData(sellItem, payItem, itemsPerSell, itemsPerPay, sellStock, payStock, name);
         npcs.add(npc);
         npc.setPosRaw(loc.x(), loc.y(), loc.z());
         npc.setDeltaMovement(0, 1, 0);
+        npc.setYHeadRot(yHeadRot);
         new BukkitRunnable() {
             @Override
             public void run() {
