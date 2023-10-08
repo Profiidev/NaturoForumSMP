@@ -32,6 +32,7 @@ public class StatusInvClick {
                     statusManager.setPlayerStatus(display, (Player) e.getWhoClicked());
                 } else {
                     statusManager.getStatusCaches().get(e.getWhoClicked().getUniqueId()).currentStatusToGive = display;
+                    statusManager.getStatusCaches().get(e.getWhoClicked().getUniqueId()).currentEditingStatus = "";
                     e.getWhoClicked().openInventory(StatusInvs.getPlayerInv(e.getWhoClicked().getUniqueId(), InvTitles.status_Player_ToStatus));
                 }
             } else if(e.getClick().equals(ClickType.RIGHT)) {

@@ -1,6 +1,8 @@
 package de.benji.naturoforumsmp.API.Strings.Invs;
 
 public class InvTitles {
+    public static final String smp_PluginInv = "§8» §6§lPlugins §8«";
+
     public static final String status_MainInv = "§6Status";
     public static final String status_CreateInv = "§2Add a Status";
     public static final String status_EditInv = "§6Edit: ";

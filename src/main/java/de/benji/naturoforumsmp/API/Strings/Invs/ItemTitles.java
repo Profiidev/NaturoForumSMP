@@ -6,6 +6,18 @@ public class ItemTitles {
     public static final String backItem = "§8Back";
     public static final String page = "§6Page ";
 
+    public static final String smp_Msg = "§8» §6§lMsg";
+    public static final String smp_Status = "§8» §6§lStatus";
+    public static final String smp_Worldtracker = "§8» §6§lWorldtracker";
+    public static final String smp_Sanddupe = "§8» §6§lSanddupe";
+    public static final String smp_NPCShops = "§8» §6§lNPCShops";
+    public static final String smp_CarpetDuper = "§8» §6§lCarpetDuper";
+    public static final String smp_SpawnElytra = "§8» §6§lSpawnElytra";
+    public static final String smp_Brausebad = "§8» §6§lBrausebad";
+    public static final String smp_Homes = "§8» §6§lHomes";
+    public static final String smp_Active = "§8» §a§lAktiviert";
+    public static final String smp_Inactive = "§8» §c§lDeaktiviert";
+
     public static final String status_AutoAFKEnabled = "§2AFK-Status enabled";
     public static final String status_AutoAFKDisabled = "§2Enable auto AFK-Status";
     public static final String status_CreateStatus = "§2Add Status";
