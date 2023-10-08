@@ -22,6 +22,7 @@ import de.benji.naturoforumsmp.Listener.*;
 import de.benji.naturoforumsmp.Main.SMP.Commands.*;
 import de.benji.naturoforumsmp.Main.SMP.Listeners.SMPJoin;
 import de.benji.naturoforumsmp.Main.SMP.TPS.TpsTicker;
+import de.benji.naturoforumsmp.Main.SMP.Util.SMPInvs;
 import de.benji.naturoforumsmp.Msg.Commands.R;
 import de.benji.naturoforumsmp.Msg.Commands.SetMsgColor;
 import de.benji.naturoforumsmp.Msg.Main.MsgMain;
@@ -122,6 +123,8 @@ public final class Main extends JavaPlugin {
         pluginManager.registerEvents(new EntityClick(), GlobalManager.getInstance());
         pluginManager.registerEvents(new Click(), GlobalManager.getInstance());
         pluginManager.registerEvents(new PlayerMove(), GlobalManager.getInstance());
+
+        SMPInvs.registerPluginInvClicks();
     }
 
     private void enableMain() {

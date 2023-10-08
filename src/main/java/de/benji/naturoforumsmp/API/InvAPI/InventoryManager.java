@@ -24,6 +24,10 @@ public class InventoryManager {
         for(ItemCallbackInfo itemCallbackInfo: itemCallbacks) {
             if(display.contains(itemCallbackInfo.display) && invTitle.contains(itemCallbackInfo.invTitle)) {
                 e.setCancelled(true);
+                if(itemCallbackInfo.subplugin == null) {
+                    itemCallbackInfo.callback.accept(e);
+                    continue;
+                }
                 if(GlobalManager.getSubpluginManager().isPluginEnabled(itemCallbackInfo.subplugin))
                     itemCallbackInfo.callback.accept(e);
             }

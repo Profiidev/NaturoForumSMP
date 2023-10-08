@@ -188,6 +188,11 @@ public class StatusInvClicks {
 
     //Player Inv
     public static void backToEditInv(InventoryClickEvent e) {
-        e.getWhoClicked().openInventory(StatusInvs.getEditInv(StatusMain.getStatusManager().getStatusCaches().get(e.getWhoClicked().getUniqueId()).currentEditingStatus));
+        String currentEditingStatus = StatusMain.getStatusManager().getStatusCaches().get(e.getWhoClicked().getUniqueId()).currentEditingStatus;
+        if(currentEditingStatus.equals("")) {
+            backToMain(e);
+            return;
+        }
+        e.getWhoClicked().openInventory(StatusInvs.getEditInv(currentEditingStatus));
     }
 }
