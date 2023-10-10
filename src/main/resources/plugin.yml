@@ -21,3 +21,4 @@ commands:
   portal:
   home:
   sethome:
+  spawn:

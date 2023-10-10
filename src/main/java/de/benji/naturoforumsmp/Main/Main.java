@@ -29,6 +29,8 @@ import de.benji.naturoforumsmp.Msg.Main.MsgMain;
 import de.benji.naturoforumsmp.NPCShops.Commands.NPCCommand;
 import de.benji.naturoforumsmp.NPCShops.Main.NPCShopsMain;
 import de.benji.naturoforumsmp.Sanddupe.Main.SanddupeMain;
+import de.benji.naturoforumsmp.Spawn.Commands.Spawn;
+import de.benji.naturoforumsmp.Spawn.Main.SpawnMain;
 import de.benji.naturoforumsmp.SpawnElytra.Main.SpawnElytraMain;
 import de.benji.naturoforumsmp.Status.Commands.StatusCommand;
 import de.benji.naturoforumsmp.Status.Main.StatusMain;
@@ -78,6 +80,7 @@ public final class Main extends JavaPlugin {
         subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.CarpetDuper.key) != null ? plugins.get(Subplugin.CarpetDuper.key) : false, false, Subplugin.CarpetDuper, CarpetDuperMain::onEnable, CarpetDuperMain::onDisable));
         subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.SpawnElytra.key) != null ? plugins.get(Subplugin.SpawnElytra.key) : false, false, Subplugin.SpawnElytra, SpawnElytraMain::onEnable, SpawnElytraMain::onDisable));
         subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.Homes.key) != null ? plugins.get(Subplugin.Homes.key) : false, false, Subplugin.Homes, HomesMain::onEnable, HomesMain::onDisable));
+        subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.Spawn.key) != null ? plugins.get(Subplugin.Spawn.key) : false, false, Subplugin.Spawn, SpawnMain::onEnable, null));
         subpluginManager.startAllEnabledSubplugins();
 
         registerCommandsAndListeners();
@@ -107,6 +110,7 @@ public final class Main extends JavaPlugin {
         getCommand("home").setExecutor(new Home());
         getCommand("sethome").setExecutor(new SetHome());
         getCommand("npc").setExecutor(new NPCCommand());
+        getCommand("spawn").setExecutor(new Spawn());
 
         PluginManager pluginManager = GlobalManager.getPluginManager();
         pluginManager.registerEvents(new Join(), GlobalManager.getInstance());
