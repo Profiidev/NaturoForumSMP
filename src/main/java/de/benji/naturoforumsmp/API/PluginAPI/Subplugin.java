@@ -9,7 +9,8 @@ public enum Subplugin {
     NPCShops("NPCShops", 14),
     CarpetDuper("CarpetDuper", 15),
     SpawnElytra("SpawnElytra", 16),
-    Homes("Homes", 29);
+    Homes("Homes", 29),
+    Spawn("Spawn", 30);
 
     public final String key;
     public final int invPos;
