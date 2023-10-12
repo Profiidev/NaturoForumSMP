@@ -25,6 +25,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+
+    - name: Install Paper NMS
+      run: nvm paper-nms:init -f pom.xml
         
     - name: Cache the Maven packages to speed up build
       uses: actions/cache@v1
