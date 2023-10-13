@@ -9,8 +9,9 @@
 name: Java CI with Maven
 
 on:
-  push:
-    branches: [ "master" ]
+  release:
+    types:
+      - created
 
 jobs:
   build_and_deploy:
@@ -63,5 +64,5 @@ jobs:
         port: 22
         script: |
             mv /home/${{ secrets.USERNAME }}/staging/target/*.jar /home/${{ secrets.USERNAME }}/staging/target/NaturoForumSMP-1.19.jar
-            cp /home/${{ secrets.USERNAME }}/staging/target/NaturoForumSMP-1.19.jar /home/${{ secrets.USERNAME }}/test/plugins/NaturoForumSMP-1.19.jar
+            cp /home/${{ secrets.USERNAME }}/staging/target/NaturoForumSMP-1.19.jar /home/Minecraft/plugins/NaturoForumSMP-1.19.jar
             rm -rf /home/${{ secrets.USERNAME }}/staging/target
