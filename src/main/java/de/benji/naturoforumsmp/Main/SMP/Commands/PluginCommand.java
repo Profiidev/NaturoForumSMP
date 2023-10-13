@@ -16,7 +16,7 @@ public class PluginCommand implements CommandExecutor {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-		if (!sender.isOp() && sender instanceof Player) {
+		if (!sender.isOp() || !(sender instanceof Player)) {
 			sender.sendMessage(CommandMessages.notAllowed);
 			return true;
 		}

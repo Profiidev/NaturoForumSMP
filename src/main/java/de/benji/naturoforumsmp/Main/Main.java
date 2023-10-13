@@ -23,8 +23,8 @@ import de.benji.naturoforumsmp.Main.SMP.Commands.*;
 import de.benji.naturoforumsmp.Main.SMP.Listeners.SMPJoin;
 import de.benji.naturoforumsmp.Main.SMP.TPS.TpsTicker;
 import de.benji.naturoforumsmp.Main.SMP.Util.SMPInvs;
-import de.benji.naturoforumsmp.Msg.Commands.R;
-import de.benji.naturoforumsmp.Msg.Commands.SetMsgColor;
+import de.benji.naturoforumsmp.Msg.Commands.RCommand;
+import de.benji.naturoforumsmp.Msg.Commands.SetMsgColorCommand;
 import de.benji.naturoforumsmp.Msg.Main.MsgMain;
 import de.benji.naturoforumsmp.NPCShops.Commands.NPCCommand;
 import de.benji.naturoforumsmp.NPCShops.Main.NPCShopsMain;
@@ -106,8 +106,8 @@ public final class Main extends JavaPlugin {
 
         //SUBPLUGIN
         getCommand("status").setExecutor(new StatusCommand());
-        getCommand("setmsgcolor").setExecutor(new SetMsgColor());
-        getCommand("r").setExecutor(new R());
+        getCommand("setmsgcolor").setExecutor(new SetMsgColorCommand());
+        getCommand("r").setExecutor(new RCommand());
         getCommand("home").setExecutor(new HomeCommand());
         getCommand("sethome").setExecutor(new SetHomeCommand());
         getCommand("npc").setExecutor(new NPCCommand());
