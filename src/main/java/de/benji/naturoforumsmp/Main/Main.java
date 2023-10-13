@@ -15,8 +15,8 @@ import de.benji.naturoforumsmp.API.PluginAPI.Subplugin;
 import de.benji.naturoforumsmp.API.PluginAPI.SubpluginInfo;
 import de.benji.naturoforumsmp.API.PluginAPI.SubpluginManager;
 import de.benji.naturoforumsmp.CarpetDuper.Main.CarpetDuperMain;
-import de.benji.naturoforumsmp.Homes.Commands.Home;
-import de.benji.naturoforumsmp.Homes.Commands.SetHome;
+import de.benji.naturoforumsmp.Homes.Commands.HomeCommand;
+import de.benji.naturoforumsmp.Homes.Commands.SetHomeCommand;
 import de.benji.naturoforumsmp.Homes.Main.HomesMain;
 import de.benji.naturoforumsmp.Listener.*;
 import de.benji.naturoforumsmp.Main.SMP.Commands.*;
@@ -97,6 +97,7 @@ public final class Main extends JavaPlugin {
     private void registerCommandsAndListeners() {
         //MAIN
         getCommand("smp").setExecutor(new PluginCommand());
+        getCommand("smpupdate").setExecutor(new PluginUpdateCommand());
         getCommand("smphelp").setExecutor(new HelpCommand());
         getCommand("permission").setExecutor(new PermissionCommand());
         getCommand("ping").setExecutor(new PingCommand());
@@ -107,8 +108,8 @@ public final class Main extends JavaPlugin {
         getCommand("status").setExecutor(new StatusCommand());
         getCommand("setmsgcolor").setExecutor(new SetMsgColor());
         getCommand("r").setExecutor(new R());
-        getCommand("home").setExecutor(new Home());
-        getCommand("sethome").setExecutor(new SetHome());
+        getCommand("home").setExecutor(new HomeCommand());
+        getCommand("sethome").setExecutor(new SetHomeCommand());
         getCommand("npc").setExecutor(new NPCCommand());
         getCommand("spawn").setExecutor(new Spawn());
 

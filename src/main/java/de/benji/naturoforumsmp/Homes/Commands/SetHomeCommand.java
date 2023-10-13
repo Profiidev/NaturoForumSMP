@@ -11,29 +11,22 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class Home implements CommandExecutor {
+public class SetHomeCommand implements CommandExecutor {
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command cmd, @NotNull String s, @NotNull String[] args) {
+    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if(!GlobalManager.getSubpluginManager().isPluginEnabled(Subplugin.Homes)) {
             commandSender.sendMessage(CommandMessages.pluginNotEnabled);
             return true;
         }
 
-        if(!(commandSender instanceof Player)) {
+        if (!(commandSender instanceof Player) ){
             commandSender.sendMessage(CommandMessages.notAllowed);
-            return true;
+            return false;
         }
-        HomeManager homeManager = HomesMain.getHomeManager();
         Player p = (Player) commandSender;
-
-        if(!homeManager.hasHome(p.getUniqueId())) {
-            p.sendMessage("§cYou haven't set a home yet!");
-            p.sendMessage("§cUse: /sethome");
-            return true;
-        }
-
-        p.teleport(homeManager.getHome(p.getUniqueId()));
-        p.sendMessage("§eTeleported.");
-        return true;
+        HomeManager homeManager = HomesMain.getHomeManager();
+        homeManager.setHome(p.getUniqueId(), p.getLocation());
+        p.sendMessage("§eYour Home was set.");
+        return false;
     }
 }
