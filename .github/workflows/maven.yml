@@ -10,7 +10,8 @@ name: Java CI with Maven
 
 on:
   release:
-    types: [released]
+    types: [published]
+    branch: [master]
 
 jobs:
   build_and_deploy:
