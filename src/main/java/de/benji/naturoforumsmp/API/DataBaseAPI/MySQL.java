@@ -70,7 +70,7 @@ public class MySQL {
                 }
             p.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(statement);
+            Bukkit.getLogger().info(statement);
             e.printStackTrace();
         }
     }
@@ -87,9 +87,9 @@ public class MySQL {
     public void addEntry(String table, List<String> keys, List<String> values) {
         String key = String.join("`,`", keys);
         key = "`" + key  + "`";
-        List<String> valuePlayholders = new ArrayList<>();
-        values.forEach(v -> valuePlayholders.add("?"));
-        String value = String.join(",", valuePlayholders);
+        List<String> valuePlaceholders = new ArrayList<>();
+        values.forEach(v -> valuePlaceholders.add("?"));
+        String value = String.join(",", valuePlaceholders);
 
         executeStatement("INSERT INTO " + table + " (" + key + ") VALUES (" + value + ");", values);
     }
@@ -97,9 +97,9 @@ public class MySQL {
     public void addEntryWithDupe(String table, List<String> keys, List<String> values, List<String> onDupeKeys, List<String> onDupeValues) {
         String key = String.join("`,`", keys);
         key = "`" + key  + "`";
-        List<String> valuePlayholders = new ArrayList<>();
-        values.forEach(v -> valuePlayholders.add("?"));
-        String value = String.join(",", valuePlayholders);
+        List<String> valuePlaceholders = new ArrayList<>();
+        values.forEach(v -> valuePlaceholders.add("?"));
+        String value = String.join(",", valuePlaceholders);
         StringBuilder onDupe = new StringBuilder();
         List<String> values1 = new ArrayList<>(values);
         for(int i = 0; i < onDupeKeys.size(); i++) {

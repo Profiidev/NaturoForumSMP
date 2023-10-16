@@ -237,7 +237,7 @@ public class ConfigAPI {
                     new Status("", "", "", true), "", "", new HashMap<>(), 0,
                     plugin.getConfig().getString(key + "." + k + ".current"), "",
                     plugin.getConfig().getBoolean(key + "." + k + ".isAFK"),
-                    plugin.getConfig().getBoolean(key + "." + k + ".AutoAFK"), false));
+                    plugin.getConfig().getBoolean(key + "." + k + ".AutoAFK"), true));
         });
         return map;
     }

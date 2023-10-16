@@ -11,22 +11,36 @@ import java.util.function.Consumer;
 
 public class InventoryManager {
     private final List<ItemCallbackInfo> itemCallbacks;
+    private boolean isLooping = false;
+    private final List<ItemCallbackInfo> tempCallbacks;
 
     public InventoryManager() {
         itemCallbacks = new ArrayList<>();
+        tempCallbacks = new ArrayList<>();
     }
 
     public void addItem(String display, String invTitle, Consumer<InventoryClickEvent> callback, Subplugin subplugin) {
-        itemCallbacks.add(new ItemCallbackInfo(display, invTitle, callback, subplugin));
+        ItemCallbackInfo itemCallbackInfo = new ItemCallbackInfo(display, invTitle, callback, subplugin);
+        for(ItemCallbackInfo itemCallbackInfo1: itemCallbacks) {
+            if(itemCallbackInfo1.display.equals(display) && itemCallbackInfo1.invTitle.equals(invTitle) && itemCallbackInfo1.subplugin == subplugin)
+                return;
+        }
+
+        if(isLooping) {
+            tempCallbacks.add(itemCallbackInfo);
+        } else {
+            itemCallbacks.add(itemCallbackInfo);
+        }
     }
 
     public void requestCallback(String display, String invTitle, InventoryClickEvent e) {
+        isLooping = true;
         for(ItemCallbackInfo itemCallbackInfo: itemCallbacks) {
             if(display.contains(itemCallbackInfo.display) && invTitle.contains(itemCallbackInfo.invTitle)) {
                 e.setCancelled(true);
                 if(itemCallbackInfo.subplugin == null) {
                     itemCallbackInfo.callback.accept(e);
-                    continue;
+                    break;
                 }
                 if(GlobalManager.getSubpluginManager().isPluginEnabled(itemCallbackInfo.subplugin))
                     itemCallbackInfo.callback.accept(e);
@@ -34,6 +48,8 @@ public class InventoryManager {
             if(display.equals(ItemTitles.spacingItem))
                 e.setCancelled(true);
         }
+        isLooping = false;
+        itemCallbacks.addAll(tempCallbacks);
     }
 
     private static class ItemCallbackInfo {

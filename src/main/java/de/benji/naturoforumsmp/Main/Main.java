@@ -69,7 +69,7 @@ public final class Main extends JavaPlugin {
         enableMain();
 
         HashMap<String, Boolean> plugins = GlobalManager.getDataStoreAPI().loadStringBooleanHashMap(DataKey.SMPPlugins);
-        //Brausebad NPCShops Homes
+        //Brausebad
         SubpluginManager subpluginManager = GlobalManager.getSubpluginManager();
         subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.Brausebad.key) != null ? plugins.get(Subplugin.Brausebad.key) : false, true, Subplugin.Brausebad, null, null));
         subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.Msg.key) != null ? plugins.get(Subplugin.Msg.key) : false, false, Subplugin.Msg, MsgMain::onEnable, MsgMain::onDisable));
@@ -114,20 +114,21 @@ public final class Main extends JavaPlugin {
         getCommand("spawn").setExecutor(new Spawn());
 
         PluginManager pluginManager = GlobalManager.getPluginManager();
-        pluginManager.registerEvents(new Join(), GlobalManager.getInstance());
-        pluginManager.registerEvents(new Quit(), GlobalManager.getInstance());
-        pluginManager.registerEvents(new InvClick(), GlobalManager.getInstance());
-        pluginManager.registerEvents(new Portal(), GlobalManager.getInstance());
-        pluginManager.registerEvents(new WorldChange(), GlobalManager.getInstance());
-        pluginManager.registerEvents(new Swap(), GlobalManager.getInstance());
-        pluginManager.registerEvents(new Death(), GlobalManager.getInstance());
-        pluginManager.registerEvents(new BlockBreak(), GlobalManager.getInstance());
-        pluginManager.registerEvents(new BlockPlace(), GlobalManager.getInstance());
-        pluginManager.registerEvents(new BlockDispense(), GlobalManager.getInstance());
-        pluginManager.registerEvents(new CommandPreprocess(), GlobalManager.getInstance());
-        pluginManager.registerEvents(new EntityClick(), GlobalManager.getInstance());
-        pluginManager.registerEvents(new Click(), GlobalManager.getInstance());
-        pluginManager.registerEvents(new PlayerMove(), GlobalManager.getInstance());
+        JavaPlugin instance = GlobalManager.getInstance();
+        pluginManager.registerEvents(new Join(), instance);
+        pluginManager.registerEvents(new Quit(), instance);
+        pluginManager.registerEvents(new InvClick(), instance);
+        pluginManager.registerEvents(new Portal(), instance);
+        pluginManager.registerEvents(new WorldChange(), instance);
+        pluginManager.registerEvents(new Swap(), instance);
+        pluginManager.registerEvents(new Death(), instance);
+        pluginManager.registerEvents(new BlockBreak(), instance);
+        pluginManager.registerEvents(new BlockPlace(), instance);
+        pluginManager.registerEvents(new BlockDispense(), instance);
+        pluginManager.registerEvents(new CommandPreprocess(), instance);
+        pluginManager.registerEvents(new EntityClick(), instance);
+        pluginManager.registerEvents(new Click(), instance);
+        pluginManager.registerEvents(new PlayerMove(), instance);
 
         SMPInvs.registerPluginInvClicks();
     }
