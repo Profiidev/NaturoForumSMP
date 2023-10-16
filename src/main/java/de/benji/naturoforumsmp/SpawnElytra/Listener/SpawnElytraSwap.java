@@ -11,7 +11,6 @@ import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 public class SpawnElytraSwap {
     public static void onSwap(Event event) {
         PlayerSwapHandItemsEvent e = (PlayerSwapHandItemsEvent) event;
-
         Player p = e.getPlayer();
 
         if(p.getWorld().getEnvironment() != World.Environment.NORMAL)
