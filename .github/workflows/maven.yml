@@ -63,6 +63,6 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: 22
         script: |
-            mv /home/${{ secrets.USERNAME }}/staging/target/*.jar /home/${{ secrets.USERNAME }}/staging/target/NaturoForumSMP-1.19.jar
-            cp /home/${{ secrets.USERNAME }}/staging/target/NaturoForumSMP-1.19.jar /home/Minecraft/plugins/NaturoForumSMP-1.19.jar
+            mv /home/${{ secrets.USERNAME }}/staging/target/*.jar /home/${{ secrets.USERNAME }}/staging/target/NaturoForumSMP.jar
+            cp /home/${{ secrets.USERNAME }}/staging/target/NaturoForumSMP.jar /home/Minecraft/plugins/NaturoForumSMP.jar
             rm -rf /home/${{ secrets.USERNAME }}/staging/target
