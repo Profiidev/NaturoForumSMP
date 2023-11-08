@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.benji.naturoforumsmp</groupId>
-    <artifactId>NaturoForumSMP-1.19</artifactId>
+    <artifactId>NaturoForumSMP</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>NaturoForumSMP-1.19</name>
+    <name>NaturoForumSMP</name>
 
     <description>NaturoForumSMP Plugin</description>
     <properties>

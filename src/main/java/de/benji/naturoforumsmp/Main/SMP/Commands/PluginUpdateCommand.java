@@ -20,7 +20,7 @@ public class PluginUpdateCommand implements CommandExecutor {
         sender.sendMessage("§eStarting update...");
         try {
             Runtime rt = Runtime.getRuntime();
-            rt.exec("cp /home/Minecraft/plugins/NaturoForumSMP-1.19.jar plugins/NaturoForumSMP-1.19.jar");
+            rt.exec("wget http://nacktebusen.de/file/NaturoForumSMP.jar -O plugins/NaturoForumSMP.jar");
         } catch (IOException e) {
             sender.sendMessage("§cError while updating");
             return true;

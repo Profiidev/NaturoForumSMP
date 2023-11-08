@@ -1,7 +1,7 @@
-name: NaturoForumSMP-1.19
+name: NaturoForumSMP
 version: '1.0'
 main: de.benji.naturoforumsmp.Main.Main
-api-version: 1.19
+api-version: 1.20
 prefix: NF_SMP
 authors: [Benji]
 description: NaturoForumSMP Plugin
