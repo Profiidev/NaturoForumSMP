@@ -23,6 +23,7 @@ public class Spawn implements CommandExecutor {
 
         if(sender instanceof Player) {
             Player player = (Player) sender;
+            player.setFallDistance(0);
             player.teleport(Objects.requireNonNull(Bukkit.getWorld("world")).getSpawnLocation());
             return true;
         }
