@@ -12,7 +12,6 @@ commands:
   setmsgcolor:
   r:
     usage: "/r <message>"
-  placebrausebad:
   npc:
   smphelp:
   permission:

@@ -24,7 +24,6 @@ public class SMPInvs {
         boolean npcShops = subpluginManager.isPluginEnabled(Subplugin.NPCShops);
         boolean carpetDuper = subpluginManager.isPluginEnabled(Subplugin.CarpetDuper);
         boolean spawnElytra = subpluginManager.isPluginEnabled(Subplugin.SpawnElytra);
-        boolean brausebad = subpluginManager.isPluginEnabled(Subplugin.Brausebad);
         boolean homes = subpluginManager.isPluginEnabled(Subplugin.Homes);
         boolean spawn = subpluginManager.isPluginEnabled(Subplugin.Spawn);
 
@@ -35,9 +34,8 @@ public class SMPInvs {
         inv.setItem(14, invAPI.createIS(Material.EMERALD, "§8» §6§lNPCShops"));
         inv.setItem(15, invAPI.createIS(Material.WHITE_CARPET, "§8» §6§lCarpetDuper"));
         inv.setItem(16, invAPI.createIS(Material.ELYTRA, "§8» §6§lSpawnElytra"));
-        inv.setItem(28, invAPI.createIS(Material.BREWING_STAND, "§8» §6§lBrausebad"));
-        inv.setItem(29, invAPI.createIS(Material.RED_BED, "§8» §6§lHomes"));
-        inv.setItem(30, invAPI.createIS(Material.GRASS_BLOCK, "§8» §6§lSpawn"));
+        inv.setItem(28, invAPI.createIS(Material.RED_BED, "§8» §6§lHomes"));
+        inv.setItem(29, invAPI.createIS(Material.GRASS_BLOCK, "§8» §6§lSpawn"));
 
         inv.setItem(19, invAPI.createIS(msg ? Material.LIME_DYE : Material.GRAY_DYE, msg ? "§8» §a§lAktiviert" : "§8» §c§lDeaktiviert"));
         inv.setItem(20, invAPI.createIS(status ? Material.LIME_DYE : Material.GRAY_DYE, status ? "§8» §a§lAktiviert" : "§8» §c§lDeaktiviert"));
@@ -46,9 +44,8 @@ public class SMPInvs {
         inv.setItem(23, invAPI.createIS(npcShops ? Material.LIME_DYE : Material.GRAY_DYE, npcShops ? "§8» §a§lAktiviert" : "§8» §c§lDeaktiviert"));
         inv.setItem(24, invAPI.createIS(carpetDuper ? Material.LIME_DYE : Material.GRAY_DYE, carpetDuper ? "§8» §a§lAktiviert" : "§8» §c§lDeaktiviert"));
         inv.setItem(25, invAPI.createIS(spawnElytra ? Material.LIME_DYE : Material.GRAY_DYE, spawnElytra ? "§8» §a§lAktiviert" : "§8» §c§lDeaktiviert"));
-        inv.setItem(37, invAPI.createIS(brausebad ? Material.LIME_DYE : Material.GRAY_DYE, brausebad ? "§8» §a§lAktiviert" : "§8» §c§lDeaktiviert"));
-        inv.setItem(38, invAPI.createIS(homes ? Material.LIME_DYE : Material.GRAY_DYE, homes ? "§8» §a§lAktiviert" : "§8» §c§lDeaktiviert"));
-        inv.setItem(39, invAPI.createIS(spawn ? Material.LIME_DYE : Material.GRAY_DYE, spawn ? "§8» §a§lAktiviert" : "§8» §c§lDeaktiviert"));
+        inv.setItem(37, invAPI.createIS(homes ? Material.LIME_DYE : Material.GRAY_DYE, homes ? "§8» §a§lAktiviert" : "§8» §c§lDeaktiviert"));
+        inv.setItem(38, invAPI.createIS(spawn ? Material.LIME_DYE : Material.GRAY_DYE, spawn ? "§8» §a§lAktiviert" : "§8» §c§lDeaktiviert"));
 
         return inv;
     }
@@ -63,7 +60,6 @@ public class SMPInvs {
         im.addItem(ItemTitles.smp_NPCShops, InvTitles.smp_PluginInv, SMPInvClicks::switchPluginStatus, null);
         im.addItem(ItemTitles.smp_CarpetDuper, InvTitles.smp_PluginInv, SMPInvClicks::switchPluginStatus, null);
         im.addItem(ItemTitles.smp_SpawnElytra, InvTitles.smp_PluginInv, SMPInvClicks::switchPluginStatus, null);
-        im.addItem(ItemTitles.smp_Brausebad, InvTitles.smp_PluginInv, SMPInvClicks::switchPluginStatus, null);
         im.addItem(ItemTitles.smp_Homes, InvTitles.smp_PluginInv, SMPInvClicks::switchPluginStatus, null);
         im.addItem(ItemTitles.smp_Spawn, InvTitles.smp_PluginInv, SMPInvClicks::switchPluginStatus, null);
         im.addItem(ItemTitles.smp_Active, InvTitles.smp_PluginInv, SMPInvClicks::switchPluginStatus, null);

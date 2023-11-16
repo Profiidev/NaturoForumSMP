@@ -69,9 +69,8 @@ public final class Main extends JavaPlugin {
         enableMain();
 
         HashMap<String, Boolean> plugins = GlobalManager.getDataStoreAPI().loadStringBooleanHashMap(DataKey.SMPPlugins);
-        //Brausebad
+
         SubpluginManager subpluginManager = GlobalManager.getSubpluginManager();
-        subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.Brausebad.key) != null ? plugins.get(Subplugin.Brausebad.key) : false, true, Subplugin.Brausebad, null, null));
         subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.Msg.key) != null ? plugins.get(Subplugin.Msg.key) : false, false, Subplugin.Msg, MsgMain::onEnable, MsgMain::onDisable));
         subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.Sanddupe.key) != null ? plugins.get(Subplugin.Sanddupe.key) : false, false, Subplugin.Sanddupe, SanddupeMain::onEnable, null));
         subpluginManager.addSubplugin(new SubpluginInfo(plugins.get(Subplugin.Status.key) != null ? plugins.get(Subplugin.Status.key) : false, false, Subplugin.Status, StatusMain::onEnable, StatusMain::onDisable));

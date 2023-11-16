@@ -48,12 +48,6 @@ public class HelpCommand implements CommandExecutor, TabCompleter {
 				try {
 					if(plugins.get(args[0])) {
 						switch(args[0].toLowerCase()) {
-						case "brausebad": {
-							p.sendMessage("§6This Subplugin adds a fully funktional \"Brausebad\"");
-							p.sendMessage("§6It is craftable with Gas, Black Concrete and Glass");
-							p.sendMessage("§6Gas can be made in a Blast Furnace using Dragons Breath");
-							break;
-						}
 						case "msg": {
 							p.sendMessage("§6With §e/setmsgcolor §6you can set the Colors for each Part of the Msgmessage");
 							p.sendMessage("§6It adds the §e/r §6Command, too");
