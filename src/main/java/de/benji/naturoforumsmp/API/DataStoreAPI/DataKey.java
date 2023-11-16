@@ -1,7 +1,6 @@
 package de.benji.naturoforumsmp.API.DataStoreAPI;
 
 public enum DataKey {
-    BrausebadLoc("Brausebad.Locs"),
     CarpetDuperLoc("CarpetDuper.Loc"),
     SMPPlugins("SMP.Plugins"),
     SMPJoined("SMP.Joined"),

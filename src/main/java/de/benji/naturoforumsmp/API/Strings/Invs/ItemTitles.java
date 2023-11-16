@@ -13,7 +13,6 @@ public class ItemTitles {
     public static final String smp_NPCShops = "§8» §6§lNPCShops";
     public static final String smp_CarpetDuper = "§8» §6§lCarpetDuper";
     public static final String smp_SpawnElytra = "§8» §6§lSpawnElytra";
-    public static final String smp_Brausebad = "§8» §6§lBrausebad";
     public static final String smp_Homes = "§8» §6§lHomes";
     public static final String smp_Spawn = "§8» §6§lSpawn";
     public static final String smp_Active = "§8» §a§lAktiviert";
