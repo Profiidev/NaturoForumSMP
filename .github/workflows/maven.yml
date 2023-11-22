@@ -32,10 +32,6 @@ jobs:
       with:
         maven-version: 3.8.2
 
-    - if: github.event.release
-      name: Update version in pom.xml (Release only)
-      run: mvn -B versions:set -DnewVersion=${{ github.event.release.tag_name }} -DgenerateBackupPoms=false
-
     - name: Install Paper NMS
       run: mvn paper-nms:init -f pom.xml
         
@@ -45,9 +41,10 @@ jobs:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2 
-        
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+
+    - if: github.event.release
+      name: Update version in pom.xml (Release only)
+      run: mvn -B versions:set -DnewVersion=${{ github.event.release.tag_name }} -DgenerateBackupPoms=false
 
     - name: copy file via ssh password
       uses: appleboy/scp-action@v0.1.4
