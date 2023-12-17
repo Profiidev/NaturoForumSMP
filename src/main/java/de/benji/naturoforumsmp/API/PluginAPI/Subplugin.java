@@ -1,7 +1,6 @@
 package de.benji.naturoforumsmp.API.PluginAPI;
 
 public enum Subplugin {
-    Brausebad("Brausebad", 28),
     Msg("Msg", 10),
     Sanddupe("Sanddupe", 13),
     Status("Status", 11),
@@ -9,8 +8,8 @@ public enum Subplugin {
     NPCShops("NPCShops", 14),
     CarpetDuper("CarpetDuper", 15),
     SpawnElytra("SpawnElytra", 16),
-    Homes("Homes", 29),
-    Spawn("Spawn", 30);
+    Homes("Homes", 28),
+    Spawn("Spawn", 29);
 
     public final String key;
     public final int invPos;
