@@ -17,7 +17,7 @@ public class SpawnElytraTicker {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if(!GlobalManager.getSubpluginManager().isPluginEnabled(Subplugin.SpawnElytra))
+                if(!GlobalManager.getSubpluginManager().isPluginEnabled(Subplugin.SpawnElytra) || !SpawnElytraMain.isRunning())
                     return;
 
                 ElytraManager elytraManager = SpawnElytraMain.getElytraManager();

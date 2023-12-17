@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 public class SpawnElytraMain {
     private static ElytraManager elytraManager;
+    private static boolean isRunning = true;
 
     public static void onEnable() {
         elytraManager = new ElytraManager();
@@ -23,6 +24,7 @@ public class SpawnElytraMain {
     }
 
     public static void onDisable() {
+        isRunning = false;
         for(Player p: Bukkit.getOnlinePlayers()) {
             ElytraManager elytraManager = SpawnElytraMain.getElytraManager();
 
@@ -33,5 +35,9 @@ public class SpawnElytraMain {
 
     public static ElytraManager getElytraManager() {
         return elytraManager;
+    }
+
+    public static boolean isRunning() {
+        return isRunning;
     }
 }
