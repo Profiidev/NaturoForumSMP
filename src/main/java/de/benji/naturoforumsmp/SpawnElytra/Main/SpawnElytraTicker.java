@@ -27,7 +27,9 @@ public class SpawnElytraTicker {
 
                         elytraManager.resetBoost(p.getUniqueId());
 
-                        if(elytraManager.hasSpawnElytra(p.getUniqueId()) && (p.getLocation().distance(Bukkit.getWorld("world").getSpawnLocation()) > 50)) {
+                        if(elytraManager.hasSpawnElytra(p.getUniqueId())) {
+                            if(p.getWorld().getEnvironment().equals(World.Environment.NORMAL) && p.getLocation().distance(Bukkit.getWorld("world").getSpawnLocation()) < 50)
+                                continue;
                             elytraManager.removeElytra(p);
                             continue;
                         }
