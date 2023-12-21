@@ -19,6 +19,8 @@ commands:
   calc:
   portal:
   home:
+    aliases: [HOME]
   sethome:
   spawn:
+    aliases: [SPAWN]
   smpupdate:
