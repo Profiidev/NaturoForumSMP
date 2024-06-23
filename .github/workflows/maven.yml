@@ -68,5 +68,5 @@ jobs:
         port: 22
         script: |
             mv /home/${{ secrets.USERNAME }}/staging/target/*.jar /home/${{ secrets.USERNAME }}/staging/target/NaturoForumSMP.jar
-            cp /home/${{ secrets.USERNAME }}/staging/target/NaturoForumSMP.jar /home/Minecraft/plugins/NaturoForumSMP.jar
+            cp /home/${{ secrets.USERNAME }}/staging/target/NaturoForumSMP.jar /home/{{ secrets.USERNAME }}/prod/NaturoForumSMP.jar
             rm -rf /home/${{ secrets.USERNAME }}/staging/target
