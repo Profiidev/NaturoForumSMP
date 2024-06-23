@@ -18,7 +18,7 @@ public class StatusMove {
             return;
 
         cache.isAFK = false;
-        if(cache.currentStatus.equals(""))
+        if(!cache.currentStatus.equals(""))
             manager.setPlayerStatus(cache.currentStatus, e.getPlayer());
         else
             StatusManager.setPlayerPrefixSuffix("", null, e.getPlayer());
