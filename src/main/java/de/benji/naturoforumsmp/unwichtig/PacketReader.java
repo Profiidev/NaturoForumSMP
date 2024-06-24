@@ -1,13 +1,11 @@
 package de.benji.naturoforumsmp.unwichtig;
 
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.MessageToMessageDecoder;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
-import org.bukkit.craftbukkit.v1_20_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-
+/*
+import java.nio.channels.Channel;
 import java.util.HashMap;
 import java.util.List;
 public class PacketReader {
@@ -78,5 +76,5 @@ public class PacketReader {
             sp.connection.send(packet);
             sp.containerMenu.sendAllDataToRemote();
 
-        }*/
-}
+        }*//*
+}*/

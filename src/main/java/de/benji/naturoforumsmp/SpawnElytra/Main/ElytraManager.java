@@ -41,7 +41,7 @@ public class ElytraManager {
         ItemMeta im = is.getItemMeta();
         im.addEnchant(Enchantment.BINDING_CURSE, 2, true);
         im.addEnchant(Enchantment.VANISHING_CURSE, 2, true);
-        im.addEnchant(Enchantment.DURABILITY, 500, true);
+        im.addEnchant(Enchantment.UNBREAKING, 500, true);
         im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         is.setItemMeta(im);
 

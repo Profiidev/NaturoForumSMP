@@ -34,6 +34,7 @@ public class StatusMain {
         statusManager.setStatusCaches(dataStoreAPI.loadUUIDStatusCacheHashMap(DataKey.StatusCaches));
 
         HashMap<String, HashMap<UUID, Boolean>> statusAccess = dataStoreAPI.loadStringUUIDBooleanHashMapHashMap(DataKey.StatusAccess);
+
         statusManager.setStatusData(dataStoreAPI.loadStringStatusHashMap(DataKey.StatusData));
 
         for(String key: statusManager.getStatusData().keySet()) {

@@ -86,7 +86,7 @@ public class InvAPI {
 		if (url == null || url.isEmpty())
 			return null;
 
-		GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+		GameProfile profile = new GameProfile(UUID.randomUUID(), "dev");
 		byte[] encodedData = Base64.getEncoder().encode(String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes());
 		profile.getProperties().put("textures", new Property("textures", new String(encodedData)));
 

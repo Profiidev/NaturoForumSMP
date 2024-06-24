@@ -14,7 +14,8 @@ import de.benji.naturoforumsmp.Status.Main.StatusMain;
 import de.benji.naturoforumsmp.Status.Main.StatusManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_20_R2.entity.CraftPlayer;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -104,10 +105,14 @@ public class StatusInvs {
         List<String> blacklist = new ArrayList<>();
         List<String> whitelist = new ArrayList<>();
         for(UUID k: status.statusAllow.keySet()) {
+            OfflinePlayer p = Bukkit.getOfflinePlayer(k);
+            if(p == null)
+                continue;
+
             if(!status.statusAllow.get(k)) {
-                blacklist.add(Objects.requireNonNull(Bukkit.getPlayer(k)).getName());
+                blacklist.add(Objects.requireNonNull(p).getName());
             } else {
-                whitelist.add(Objects.requireNonNull(Bukkit.getPlayer(k)).getName());
+                whitelist.add(Objects.requireNonNull(p).getName());
             }
         }
 

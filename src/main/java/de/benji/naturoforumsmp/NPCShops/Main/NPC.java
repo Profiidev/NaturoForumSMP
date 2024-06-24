@@ -2,20 +2,14 @@ package de.benji.naturoforumsmp.NPCShops.Main;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.item.ItemStack;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_20_R2.CraftWorld;
+import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -138,10 +132,5 @@ public class NPC extends Mob {
     @Override
     public @NotNull HumanoidArm getMainArm() {
         return HumanoidArm.RIGHT;
-    }
-
-    @Override
-    public @NotNull EntityDeathEvent dropAllDeathLoot(@NotNull DamageSource damageSource) {
-        return new EntityDeathEvent(this.getBukkitLivingEntity(), new ArrayList<>(), 0);
     }
 }

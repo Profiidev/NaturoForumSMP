@@ -219,7 +219,7 @@ public class ConfigAPI {
         plugin.getConfig().getConfigurationSection(key).getKeys(false).forEach(k -> {
             HashMap<UUID, Boolean> data = new HashMap<>();
             plugin.getConfig().getConfigurationSection(key + "." + k).getKeys(false).forEach(uuid -> {
-                data.put(UUID.fromString(uuid), plugin.getConfig().getBoolean(key + "." + k + ".show"));
+                data.put(UUID.fromString(uuid), plugin.getConfig().getBoolean(key + "." + k + "." + uuid + ".show"));
             });
             map.put(k, data);
         });
